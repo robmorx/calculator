@@ -1,30 +1,49 @@
-let num = 0;
+let num1 = null;
+let num2 = null;
+let result= null;
+let operator = null;
+let cont = 0;
+let checkOperator = false;
 const buttons = document.querySelectorAll(".btn");
 const display = document.querySelector(".display");
-const sum = document.querySelector("#+");
-const numberToDisplay = document.createElement("span");
-
+const clickEvent = (event) => {
+    //console.log(event);
+   if (event.target.className === "btn operator"){
+    if(!checkOperator){
+        operator = event.target.id;
+        //Equals to number 2 if you click 2 times
+        num2  = num1;
+        checkOperator = true;
+    }else{
+        //Execute function equal if you click 2 times an operator
+        
+    }
+   }else if (event.target.className === "btn"){
+    setNumber(event.target.id, checkOperator);
+   }
+};
 buttons.forEach((button) => {
     // and for each one we add a 'click' listener
-    button.addEventListener("click", () => {
-        saveNumber(parseInt(button.id));
-    });
+    button.addEventListener("click", clickEvent);
 });
+function setNumber(id, checkOperator){
+    //Check if is the first number or the second
+    console.log(id);
+    if (!checkOperator){
+        num1 = (num1*10)+parseInt(id);
+        cont++;
+        displayNumber(num1);
+    }else {
 
-function siguiente(event) {
-    event.id;
+    }
+}
 
-  }
-
-function saveNumber(numToSave) {  
-    num = (num*10)+ numToSave;
-    
-    
-    
+function displayNumber(numToDysplay){
+    display.textContent=numToDysplay;
 }
 
 function operate(num1,num2,operator){
-    let result=0;
+    
     switch (operator) {
         case "+":
             result = num1+num2;
@@ -41,6 +60,5 @@ function operate(num1,num2,operator){
         default:
             break;
     }
-    return result;
+    displayNumber(result);
 }
-sum.onclick=siguiente(sum);
